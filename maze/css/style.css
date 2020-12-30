@@ -3,31 +3,45 @@
   margin: 0;
   padding: 0;
 }
+body {
+  background-image: linear-gradient(90deg, #0181a1 0%,#172c5f 100%);
+}
 .conainer {
   max-width: 800px;
   margin: 0 auto;
   position: relative;
 }
 .buttons {
-  margin-top: 100px;
+  margin-top: 20px;
   text-align: center;
   z-index: 20;
 }
 .select, .start {
   padding: 5px; 
+  width: 140px;
+  height: 40px;
   cursor: pointer;
+  background-color: rgba(0,0,0,0.3);
+  color: #fff;
+  border: none;
+}
+.select option{
+  background-color: rgba(0,0,0,0.5);
+}
+.select:focus, .start:focus {
+  outline: none;
 }
 .canvas-wrapper {
   text-align: center;
-  margin-top: 30px;
+  margin-top: 10px;
   position: relative;
 }
 .maze-canvas {
   background-color: rgba(0, 0, 0, 0.644);
 }
 .win-msg {
-  width: 400px;
-  height: 400px;
+  width: 600px;
+  height: 600px;
   position: absolute;
   top: 0;
   right: 50%;

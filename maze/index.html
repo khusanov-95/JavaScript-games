@@ -7,7 +7,8 @@
     <title>Document</title>
   </head>
   <body>
-    <div class="container">
+      <img style="display: none;" src="img/finish.png" alt="finish" class="img-finish" id="imgFinish">
+      <img style="display: none;" src="img/player.png" alt="player" class="img-player" id="imgPlayer">
       <div class="buttons">
         <select id="select" class="select">
           <option value="easy">Easy</option>
@@ -17,7 +18,7 @@
         <button id="start" class="start">Start</button>
       </div>
       <div class="canvas-wrapper">
-        <canvas id="mazeCanvas" width="400px" height="400px" class="maze-canvas"></canvas>
+        <canvas id="mazeCanvas" width="600px" height="600px" class="maze-canvas"></canvas>
         <div class="win-msg dnone" id="win-msg">
           <h3>Congratulations!</h3>
           <p>You won!</p>

@@ -1,10 +1,14 @@
-//----------------------Maze generator--------------------// 
+window.onload = function() {
+  //----------------------Maze generator--------------------// 
 
 //get canvas, width of canvas, height of canvas
 const mCanvas = document.getElementById('mazeCanvas');
 const mtx = mCanvas.getContext("2d");
 const width = mCanvas.offsetWidth;
 const height = mCanvas.offsetHeight;
+//get player and finish images
+const finishImg = document.getElementById('imgFinish');
+const playerImg = document.getElementById('imgPlayer');
 
 // steps counter
 let counter = 0;
@@ -12,7 +16,7 @@ let counter = 0;
 //initialize columns, rows, width/height of cell, empty grid and current(for current cell)
 let cols;
 let rows;
-let w = 80;
+let w = 60;
 let grid = [];
 let current;
 
@@ -79,7 +83,6 @@ function Maze(i,j){
     if(left && !left.visited) {
       neighbors.push(left)
     }
-
     if (neighbors.length > 0) {
       const random = Math.floor(Math.random() * neighbors.length);
       return neighbors[random]
@@ -92,16 +95,18 @@ function Maze(i,j){
     const x = this.i*w;
     const y = this.j*w;
     // mtx.beginPath();
-    mtx.fillStyle = "rgba(0,255,255,100)";
-    mtx.fillRect(x+3, y+3, w-6, w-6);
+    // mtx.fillStyle = "rgba(0,255,255,100)";
+    // mtx.fillRect(x+3, y+3, w-6, w-6);
+    mtx.drawImage(playerImg, x, y, w, w);
   }
   //highlight the finish cell
   this.finishColor = function () {
     const x = this.i*w;
     const y = this.j*w;
     // mtx.beginPath();
-    mtx.fillStyle = "green";
-    mtx.fillRect(x+3, y+3, w-6, w-6);
+    // mtx.fillStyle = "green";
+    // mtx.fillRect(x+3, y+3, w-6, w-6);
+    mtx.drawImage(finishImg, x, y, w, w);
   }
   //show wall for each side and show visited rectangle
   this.show = function() { 
@@ -240,6 +245,7 @@ const difficulty = document.getElementById('select');
 const startGame = document.getElementById('start');
 
 //function for playing game with arrow keys 
+
 function moveK(e) {
    // When top arrow is pressed 
    if(e.isComposing || e.keyCode === 38) {
@@ -278,6 +284,77 @@ function moveK(e) {
     }
   }
 }
+
+// playing with mouse
+
+// enable mousemove event when mouse is pressed
+let isMoving = false;
+window.addEventListener('mousedown', function mouseDown(e) {
+  isMoving = true;
+});
+
+ // Mouse move actions
+let topToBottom = 0;
+let rightToLeft = 0;
+
+function mouseMove(e) {
+  if(isMoving == true) {
+       //if user moves mouse the top
+       if(e.offsetY < topToBottom) {
+         if(e.offsetY % w - (w*0.3) == 0) {
+          current.show();
+          current = current.moveUp();
+          current.highlight();
+          if(current === finish){
+            finishGame();
+          } 
+         }
+      }
+      //if user moves mouse the bottom
+      else if (e.offsetY > topToBottom){
+        if(e.offsetY % w - (w*0.3) == 0) {
+          current.show();
+          current = current.moveDown();
+          current.highlight(); 
+          if(current === finish){
+            finishGame();
+          } 
+        }
+      }
+      topToBottom = e.offsetY;
+       //if user moves mouse the left
+       if(e.offsetX < rightToLeft) {
+        if(e.offsetX % w - (w*0.3) == 0) {
+          current.show();
+        current = current.moveLeft();
+        current.highlight(); 
+        if(current === finish){
+          finishGame();
+        } 
+        }
+      }
+      ////if user moves mouse the left
+      else if (e.offsetX > rightToLeft){
+        if(e.offsetX % w - (w*0.3) == 0) {
+          current.show();
+          current = current.moveRight();
+          current.highlight();   
+          if(current === finish){
+            finishGame();
+          } 
+        }
+      }
+      rightToLeft = e.offsetX;
+  }
+}
+window.addEventListener('mousemove', mouseMove);
+
+window.addEventListener('mouseup', function mouseUp(e) {
+  if(isMoving === true) {
+    isMoving = false;
+  }
+})
+
 //add function as event listener to window
 window.addEventListener("keydown", moveK);
 
@@ -290,6 +367,7 @@ function finishGame() {
  counter = 0;
  //disable arrow keys
  window.removeEventListener("keydown", moveK);
+ window.removeEventListener('mousemove', mouseMove)
 }
 
 // decrease with and height for different difficulties
@@ -297,9 +375,9 @@ difficulty.addEventListener('change',(e) => {
   if(e.target.value === 'medium') {
     w = 40;
   } else if (e.target.value === 'hard') {
-    w = 20; // too slow
+    w = 20;
   } else {
-    w = 80;
+    w = 60;
   }
 });
 
@@ -324,4 +402,8 @@ winMsgBtn.addEventListener('click', () => {
   current.highlight();
   finish.finishColor();
   window.addEventListener("keydown", moveK);
+  window.addEventListener('mousemove', mouseMove)
 })
+
+}
+
