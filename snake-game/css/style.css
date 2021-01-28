@@ -1,0 +1,56 @@
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  min-height: 100vh;
+  overflow-y: hidden;
+  position: relative;
+  font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+  background-color:  rgb(22, 22, 22);
+}
+.info {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 5px;
+  color: rgb(155, 154, 154);
+  padding: 0 3px;
+}
+.sp-button {
+  border-radius: 50%;
+  border: none;
+  color: inherit;
+  background-color: rgb(46, 46, 46);
+  cursor: pointer;
+  outline: none;
+}
+.sp-button.sp-button--active {
+  background-color: yellow;
+}
+.canvas-wrap {
+  position: relative;
+}
+.my-canvas {
+  background-color: rgb(34, 34, 34);
+}
+.gameover {
+  width: 400px;
+  height: 400px;
+  background-color: rgba(0,0,0,.9);
+  position: absolute;
+  bottom: 4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  color: #fff;
+  display: none;
+}
+.gameover h2 {
+  font-size: 36px;
+}
+.gameover button {
+  font-size: bold;
+  padding: 5px;
+  cursor: pointer;
+}

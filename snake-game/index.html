@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/style.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="canvas-wrap">
+    <div class="info">
+      <div class="speed" id="speed">
+        Speed:
+        <button class="sp-button sp-button--active" id="sp1">1x</button>
+        <button class="sp-button" id="sp2">2x</button>
+        <button class="sp-button" id="sp3">3x</button>
+      </div>
+      <div class="score">Score: <span id="totalScore">0</span></div>
+    </div>
+      <canvas id="myCanvas" class="my-canvas" width="400" height="400"></canvas>
+      <div class="gameover" id="gameover">
+        <h2>Game-Over</h2>
+        <button id="gameoverBtn">Start Again</button>
+      </div>
+    </div>
+    
+    <script src="js/app.js"></script>
+  </body>
+</html>
